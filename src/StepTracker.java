@@ -2,11 +2,11 @@ import java.util.Scanner;
 
 public class StepTracker {
     Scanner scanner;
-    static MonthData[] monthToData = new MonthData[12];
+    MonthData[] monthToData = new MonthData[12];
 
-    static int selectedMonth;
+    int selectedMonth;
 
-    static int goalByStepsPerDay = 10000;
+    int goalByStepsPerDay = 10000;
 
     StepTracker(Scanner scan) {
         scanner = scan;
@@ -16,43 +16,44 @@ public class StepTracker {
     }
 
     /*ћетод, печатающий статистику*/
-   public void printStatistic() {
+   void printStatistic() {
         System.out.println("¬ведите номер мес€ца");
         selectedMonth = scanner.nextInt();
+        selectedMonth = selectedMonth - 1;
 
         /*количество пройденных шагов по дн€м*/
-        MonthData.printDaysAndStepsFromMonth();
+        monthToData[selectedMonth].printDaysAndStepsFromMonth();
         System.out.println();
 
         /*общее количество шагов за мес€ц;*/
-        System.out.println("ќбщее количество шагов за мес€ц: " + MonthData.sumStepsFromMonth());
+        System.out.println("ќбщее количество шагов за мес€ц: " + monthToData[selectedMonth].sumStepsFromMonth());
         System.out.println();
 
         /*максимальное пройденное количество шагов в мес€це;*/
-        System.out.println("ћаксимальное пройденное количество шагов в мес€це: " + MonthData.maxSteps());
+        System.out.println("ћаксимальное пройденное количество шагов в мес€це: " + monthToData[selectedMonth].maxSteps());
         System.out.println();
 
         /*среднее количество шагов;*/
-        System.out.println("—реднее количество шагов: " + MonthData.monthlyStepsAverage());
+        System.out.println("—реднее количество шагов: " + monthToData[selectedMonth].monthlyStepsAverage());
         System.out.println();
 
         /*пройденна€ дистанци€ (в километрах);*/
-        System.out.println("ѕройденна€ дистанци€ (в километрах): " + MonthData.distanceCoveredKm());
+        System.out.println("ѕройденна€ дистанци€ (в километрах): " + monthToData[selectedMonth].distanceCoveredKm());
         System.out.println();
 
         /*количество сожжЄнных килокалорий;*/
-        System.out.println(" оличество сожжЄнных килокалорий: " + MonthData.burnedKcal());
+        System.out.println(" оличество сожжЄнных килокалорий: " + monthToData[0].burnedKcal());
         System.out.println();
 
         /*лучша€ сери€: максимальное количество подр€д идущих дней, в течение которых
         количество шагов за день было равно или выше целевого.*/
         System.out.println("лучша€ сери€: максимальное количество подр€д идущих дней, в течение которых, " +
-                "количество шагов за день было равно или выше целевого: " + MonthData.bestSeries(goalByStepsPerDay));
+                "количество шагов за день было равно или выше целевого: " + monthToData[selectedMonth].bestSeries(goalByStepsPerDay));
         System.out.println();
     }
 
     /*ћетод, добавл€ющий шаги в статистику в выбранный мес€ц и день*/
-   public void addNewNumberStepsPerDay(){
+  public void addNewNumberStepsPerDay(){
         Scanner scanner = new Scanner(System.in);
         System.out.println("¬ведите номер мес€ца");
         int month = scanner.nextInt();// ввод и проверка номера мес€ца
@@ -84,10 +85,10 @@ public class StepTracker {
         // получение соответствующего объекта MonthData из массива
         MonthData monthData = monthToData[month - 1];
         // сохранение полученных данных
-        monthToData[month - 1].days[day - 1] = steps;
+        monthData.days[day - 1] = steps;
     }
 
-    public static void changeStepGoal(){
+    public void changeStepGoal(){
         Scanner scanner = new Scanner(System.in);
 
         System.out.println("¬ведите новое значение цели количества шагов в день: ");

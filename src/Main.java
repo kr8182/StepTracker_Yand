@@ -4,10 +4,7 @@ public class Main {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
 
-        MonthData monthData = new MonthData();
-
         StepTracker tracker = new StepTracker(scanner);
-
 
         while (true) {
 
@@ -41,5 +38,6 @@ public class Main {
         System.out.println("3. Напечатать статистику за определённый месяц");
         System.out.println("4. Завершить программу");
     }
+
 }
 
