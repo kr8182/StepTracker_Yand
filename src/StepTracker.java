@@ -94,9 +94,9 @@ public class StepTracker {
         System.out.println("Введите новое значение цели количества шагов в день: ");
         int newGoal = scanner.nextInt();
 
-        if (newGoal == 0 || newGoal <= goalByStepsPerDay) {
+        if (newGoal == 0 || newGoal < 0) {
             System.out.println("Вы ввели значение: " + newGoal + ", что является недопустимым");
-            System.out.println("Новая цель не может быть меньше или равна текущей, а также равна 0");
+            System.out.println("Новая цель не может быть меньше или равна 0");
         }
         else {goalByStepsPerDay = newGoal;}
     }
